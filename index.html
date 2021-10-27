@@ -7,10 +7,43 @@
 
   </head>
   <body>
-    <object width="620" height="327">
-      <param name="allowScriptAccess" value="always"></param>
-     
-      <iframe  width="560" height="315" src="https://www.youtube.com/embed/NpDAFKqeUDw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen id="video1" type="application/x-shockwave-flash" allowscriptaccess="always"  onended="videoEnded()"></iframe>
-  </object>
+   <div id="player"></div>
+
+<script src="http://www.youtube.com/player_api"></script>
+
+<script>
+    
+    // create youtube player
+    var player;
+    function onYouTubePlayerAPIReady() {
+        player = new YT.Player('player', {
+          height: '390',
+          width: '640',
+          videoId: 'NpDAFKqeUDw',
+          playerVars: {
+      				'controls': 0
+          },
+          events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+          }
+        });
+    }
+
+    // autoplay video
+    function onPlayerReady(event) {
+        event.target.playVideo();
+    }
+
+    // when video ends
+    function onPlayerStateChange(event) {        
+        if(event.data === 0) {            
+            alert('done');
+        }
+    }
+    
+</script>
+
+
   </body>
 </html>
